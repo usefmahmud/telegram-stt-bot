@@ -327,10 +327,11 @@ assert split_text("a\nb") == ["a\nb"]
 long = ("word " * 5000).strip()
 chunks = split_text(long)
 assert all(len(c) <= TELEGRAM_LIMIT for c in chunks)
-assert " ".join(chunks).split() == long.split()
+assert "".join(chunks) == long
 lines = "\n".join(f"line {i}" for i in range(3000))
 chunks = split_text(lines)
 assert all(len(c) <= TELEGRAM_LIMIT for c in chunks)
+assert "\n".join(chunks) == lines
 out = format_transcript("my <file>.mp3", 12.4, "Arabic", "hello <world> & co")
 assert out[0].startswith("🎧 <b>my &lt;file&gt;.mp3</b> · 12s · Arabic")
 assert "&lt;world&gt;" in out[0] and "<world>" not in out[0]
