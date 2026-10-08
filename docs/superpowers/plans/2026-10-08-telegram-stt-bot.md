@@ -983,7 +983,7 @@ from bot.config import Config
 from bot.__main__ import build_application
 
 app = build_application(Config.from_env())
-counts = {type(h).__name__ for h in app.handlers[0].values()}
+counts = {type(h).__name__ for h in app.handlers[0]}
 assert "CommandHandler" in counts
 assert "MessageHandler" in counts
 assert "CallbackQueryHandler" in counts
