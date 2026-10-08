@@ -5,6 +5,8 @@ import os
 import shutil
 from dataclasses import dataclass
 
+from dotenv import load_dotenv
+
 
 class ConfigError(RuntimeError):
     """Raised when required configuration is missing or invalid."""
@@ -44,6 +46,7 @@ class Config:
 
     @classmethod
     def from_env(cls) -> "Config":
+        load_dotenv()
         for tool in ("ffmpeg", "ffprobe"):
             if shutil.which(tool) is None:
                 raise ConfigError(f"{tool} not found on PATH")
